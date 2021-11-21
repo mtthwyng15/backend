@@ -32,3 +32,22 @@ As a User
 - There should be a Readme file with clear setup instructions
 - (Bonus) Unit / functional / integration tests
 - Please upload the completed solution to a hosted source repository (on GitHub, GitLab or similar).
+
+
+## Usage
+
+### Postgres
+
+- Assumptions
+    - Postgresql has already been installed
+    - Postgresql service has already started with default port
+    - Database name `test0009` has not been created or does not exist
+    - Username `postgres` and password `postgres` and grant necessary privileges
+    - NodeJS has been installed
+
+- How to run the script and populate data into Postgres database
+
+```bash
+npm install
+node conn_database.js
+```

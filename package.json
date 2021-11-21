@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "csv-parser": "^3.0.0",
+    "csv-stream": "^0.2.0",
+    "file-system": "^2.2.2",
+    "mongodb": "^4.2.0",
+    "pg": "^8.7.1",
+    "pg-hstore": "^2.3.4",
+    "pgtools": "^0.3.2",
+    "request": "^2.88.2",
+    "require": "^2.4.20",
+    "sequelize": "^6.11.0"
+  }
+}
