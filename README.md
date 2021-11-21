@@ -44,6 +44,9 @@ As a User
     - Database name `test0009` has not been created or does not exist
     - Username `postgres` and password `postgres` and grant necessary privileges
     - NodeJS has been installed
+    - Mongodb has been installed
+    - Mongodb service has already been started with default port
+    - Username `myUserAdmin` and password `abc123`
 
 - How to run the script and populate data into Postgres database
 
