@@ -2,9 +2,11 @@ const { MongoClient } = require("mongodb");
 const fs = require("fs");
 const csv = require("csv-parser");
 const { Server } = require("http");
+const mongoose = require("mongoose");
+const { INTEGER } = require("sequelize/types");
+mongoose.Promise = global.Promise;
 
-const url =
-  "mongodb://myUserAdmin:abc123@localhost:27017/?maxPoolSize=20&w=majority";
+const url = "mongodb://localhost:27017/sample0001";
 
 const client = new MongoClient(url);
 
@@ -19,15 +21,13 @@ async function run() {
     // database name
     const database = client.db("test");
     // table name
-    const customerTable = database.collection("Customers")
-    const customerCompanyTable = database.collection("Customer Company")
+    const customerTable = database.collection("Customers");
+    const customerCompanyTable = database.collection("CustomerCompany");
     console.log(customerTable);
     console.log(customerCompanyTable);
 
     load_customers(customerTable);
     load_customerCompanies(customerCompanyTable);
-
-    
   } catch (err) {
     console.log(err);
   } finally {
@@ -35,12 +35,11 @@ async function run() {
 
     // Todo: improve how and when to disconnnect client connection
     // This is just a workaround for now, if it is not enough just increase the timeout
-    await sleep(5000)
+    await sleep(5000);
     await client.close();
   }
 }
 run().catch(console.dir);
-
 
 function load_customers(table) {
   fs.createReadStream(`./csv/customers.csv`)
@@ -60,12 +59,11 @@ function load_customers(table) {
     })
     .on("end", () => {
       console.log("CSV file successfully processed");
-
     });
 }
 
-function load_customerCompanies(table){
-    fs.createReadStream(`./csv/customer_companies.csv`)
+function load_customerCompanies(table) {
+  fs.createReadStream(`./csv/customer_companies.csv`)
     .pipe(csv())
     .on("data", (row) => {
       let a = 0;
@@ -73,16 +71,14 @@ function load_customerCompanies(table){
 
       table.insertOne({
         company_id: row.company_id,
-        company_name: row.company_name
+        company_name: row.company_name,
       });
     })
     .on("end", () => {
       console.log("CSV file successfully processed");
-
-    }); 
+    });
 }
 
-
 function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
