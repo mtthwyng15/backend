@@ -1,9 +1,7 @@
 const { MongoClient } = require("mongodb");
 const fs = require("fs");
 const csv = require("csv-parser");
-const { Server } = require("http");
 const mongoose = require("mongoose");
-const { INTEGER } = require("sequelize/types");
 mongoose.Promise = global.Promise;
 
 const url = "mongodb://localhost:27017/sample0001";
