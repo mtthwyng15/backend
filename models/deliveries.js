@@ -5,31 +5,26 @@ const sequelize = new Sequelize(
   `postgres://${process.env.POSTGRES_USERNAME}:${process.env.POSTGRES_PASSWORD}@${process.env.POSTGRES_HOST}:${process.env.POSTGRES_PORT}/${process.env.POSTGRES_DB_NAME}`
 );
 
-const Order = sequelize.define(
-  "Order",
+const deliveries = sequelize.define(
+  "Deliveries",
   {
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
     },
-    created_at: {
-      type: DataTypes.DATE,
+    order_item_id: {
+      type: DataTypes.INTEGER,
       allowNull: false,
-      field: "created_at",
+      field: "order_item_id",
     },
-    order_name: {
-      type: DataTypes.STRING,
+    delivered_quantity: {
+      type: DataTypes.INTEGER,
       allowNull: false,
-      field: "order_name",
-    },
-    customer_id: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      field: "customer_id",
+      field: "delivered_quantity",
     },
   },
   { freezeTableName: true, timestamps: false }
 );
 
-module.exports = Order;
+module.exports = deliveries;

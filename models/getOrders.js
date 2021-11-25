@@ -1,6 +1,6 @@
 require("dotenv").config({ path: "variables.env" });
 
-const { Order } = require(".get/models");
+// const Orders = require('./')
 
 async function connectDB() {
   const dbURL = `postgres://${process.env.POSTGRES_USERNAME}:${process.env.POSTGRES_PASSWORD}@${process.env.POSTGRES_HOST}:${process.env.POSTGRES_PORT}/${process.env.POSTGRES_DB_NAME}`;
@@ -18,7 +18,7 @@ async function connectDB() {
 async function getOrder(Order) {
   const queryInterface = connectDB();
   //   queryInterface.get(select * order where id = orderId)
-  queryInterface.findAll(Order);
-  //   const order = await getOrders.findAll();
-  //   console.log(order);
+
+  // const order = await getOrders.findAll();
+  // console.log(order);
 }
