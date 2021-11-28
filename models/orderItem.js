@@ -1,5 +1,6 @@
 const { Sequelize, DataTypes } = require("sequelize");
-// const Order = require("./Order");
+const Deliveries = require("./deliveries");
+const Order = require("./Order");
 
 require("dotenv").config({ path: "variables.env" });
 const sequelize = new Sequelize(
@@ -17,6 +18,10 @@ const orderItem = sequelize.define(
     order_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      references: {
+        model: Order,
+        key: "order_id",
+      },
       field: "order_id",
     },
     price_per_unit: {
@@ -35,13 +40,14 @@ const orderItem = sequelize.define(
   { freezeTableName: true, timestamps: false }
 );
 
+orderItem.hasMany(Deliveries, {
+  foreignKey: "id",
+});
+
 orderItem.associate = (model) => {
-  orderItem.belongsToMany(model.Order, {
-    foreignKey: {
-      allowNull: false,
-    },
+  orderItem.belongsTo(model.Order, {
+    foreignKey: "order_id",
   });
-  orderItem.hasMany(model.deliveries);
 };
 
 module.exports = orderItem;

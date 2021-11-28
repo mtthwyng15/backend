@@ -15,15 +15,25 @@ mongoose.connection.on("error", (err) => {
 const Order = require("././models/Order");
 const OrderItem = require("././models/orderItem");
 const Deliveries = require("././models/deliveries");
-const Customer = require("././models/Customer");
+const Customer = require("./models/Customer");
 const CustomerCompany = require("./models/CustomerCompany");
+const orderItem = require("././models/orderItem");
+const deliveries = require("././models/deliveries");
 const app = express();
 const port = 4000;
 
 app.get("/Order", function (req, res) {
   //  res.send("Hello World!");
 
-  Order.findAll()
+  Order.findAll({
+    // include: orderItem,
+    include: [
+      {
+        model: orderItem,
+        include: [deliveries],
+      },
+    ],
+  })
     .then((Order) => {
       res.send(Order);
     })
@@ -34,16 +44,8 @@ app.get("/Order", function (req, res) {
 
 app.get("/orderItem", (req, res) => {
   console.log("order item ------------------------");
-  // OrderItem.findOne({ where: { order_id: 1 } }).then((order) =>{
   OrderItem.findAll({
-    // include: [db.order_name],
-    // include: "Order",
-    // include: [
-    //   {
-    //     model: Order,
-    //     required: true,
-    //   },
-    // ],
+    include: deliveries,
   }).then((order) => {
     console.log(order);
     res.send(order);
@@ -59,9 +61,7 @@ app.get("/deliveries", (req, res) => {
 
 app.get("/Customer", async (req, res) => {
   const customer = await Customer.find();
-  console.log("###################################################");
   console.log(customer);
-  console.log("###################################################");
   res.send(customer);
 });
 // });

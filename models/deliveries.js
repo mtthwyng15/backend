@@ -1,4 +1,5 @@
 const { Sequelize, DataTypes } = require("sequelize");
+const orderItem = require("./orderItem");
 // const Order = require("./Order");
 // const OrderItem = require("./orderItem");
 
@@ -18,6 +19,10 @@ const deliveries = sequelize.define(
     order_item_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      references: {
+        model: orderItem,
+        key: "order_item_id",
+      },
       field: "order_item_id",
     },
     delivered_quantity: {
@@ -31,9 +36,7 @@ const deliveries = sequelize.define(
 
 deliveries.associate = (model) => {
   deliveries.belongsTo(model.OrderItem, {
-    foreignKey: {
-      allowNull: false,
-    },
+    foreignKey: "order_item_id",
   });
 };
 

@@ -33,8 +33,12 @@ const Order = sequelize.define(
   { freezeTableName: true, timestamps: false }
 );
 
+Order.hasMany(OrderItem, { foreignKey: "id" });
+
 Order.associate = (model) => {
-  Order.hasMany(model.orderItem);
+  Order.hasMany(model.orderItem, {
+    foreignKey: "id",
+  });
 };
 
 module.exports = Order;
