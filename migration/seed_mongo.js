@@ -21,7 +21,7 @@ async function run() {
     // database name
     const database = client.db();
     // table name
-    const customerTable = database.collection("Customers");
+    const customerTable = database.collection("customers");
     const customerCompanyTable = database.collection("CustomerCompany");
     console.log(customerTable);
     console.log(customerCompanyTable);

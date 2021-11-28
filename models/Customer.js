@@ -5,7 +5,7 @@ const CustomerCompany = require("./CustomerCompany");
 const customerSchema = new mongoose.Schema(
   {
     user_id: {
-      type: Number,
+      type: String,
       required: true,
     },
     login: {
@@ -21,15 +21,15 @@ const customerSchema = new mongoose.Schema(
       required: true,
     },
     company_id: {
-      type: Number,
+      type: String,
       // ref: CustomerCompany,
       required: true,
     },
     credit_cards: {
-      type: Number,
+      type: String,
       required: true,
     },
   },
-  { Collection: "Customer" }
+  { Collection: "Customers" }
 );
-module.exports = mongoose.model("Customer", customerSchema);
+module.exports = mongoose.model("customers", customerSchema);
