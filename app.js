@@ -2,10 +2,15 @@ const express = require("express");
 const routes = require("./routes/index");
 const db = require("././models");
 const mongoose = require("mongoose");
-
-const connection = mongoose.createConnection(
-  "mongodb://localhost:27017/sample0001"
-);
+require("dotenv").config({ path: "variables.env" });
+const url = process.env.MONGODB;
+// const connection = mongoose.createConnection(url);
+// const client = new MongoClient(url);
+mongoose.connect(url);
+mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
+mongoose.connection.on("error", (err) => {
+  console.error(`🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 → ${err.message}`);
+});
 
 const Order = require("././models/Order");
 const OrderItem = require("././models/orderItem");
@@ -52,12 +57,14 @@ app.get("/deliveries", (req, res) => {
   });
 });
 
-app.get("/Customer", (req, res) => {
-  Customer.find().then((customer) => {
-    console.log(customer);
-    res.send(customer);
-  });
+app.get("/Customer", async (req, res) => {
+  const customer = await Customer.find();
+  console.log("###################################################");
+  console.log(customer);
+  console.log("###################################################");
+  res.send(customer);
 });
+// });
 
 app.get("/CustomerCompany", (req, res) => {
   CustomerCompany.find().then((company) => {

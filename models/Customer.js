@@ -1,10 +1,6 @@
 const mongoose = require("mongoose");
-const CustomerCompany = require("./CustomerCompany");
 mongoose.Promise = global.Promise;
-
-const connection = mongoose.createConnection(
-  "mongodb://localhost:27017/sample0001"
-);
+const CustomerCompany = require("./CustomerCompany");
 
 const customerSchema = new mongoose.Schema(
   {
@@ -36,7 +32,4 @@ const customerSchema = new mongoose.Schema(
   },
   { Collection: "Customer" }
 );
-
-console.log("-------------");
-console.log(customerSchema);
 module.exports = mongoose.model("Customer", customerSchema);

@@ -4,7 +4,9 @@ const csv = require("csv-parser");
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 
-const url = "mongodb://localhost:27017/sample0001";
+require("dotenv").config({ path: "variables.env" });
+
+const url = process.env.MONGODB;
 
 const client = new MongoClient(url);
 
@@ -17,7 +19,7 @@ async function run() {
     console.log("Connected successfully to server");
 
     // database name
-    const database = client.db("test");
+    const database = client.db();
     // table name
     const customerTable = database.collection("Customers");
     const customerCompanyTable = database.collection("CustomerCompany");
@@ -64,9 +66,6 @@ function load_customerCompanies(table) {
   fs.createReadStream(`./csv/customer_companies.csv`)
     .pipe(csv())
     .on("data", (row) => {
-      let a = 0;
-      console.log(a);
-
       table.insertOne({
         company_id: row.company_id,
         company_name: row.company_name,
