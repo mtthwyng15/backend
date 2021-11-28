@@ -1,4 +1,6 @@
 const { Sequelize, DataTypes } = require("sequelize");
+// const Order = require("./Order");
+// const OrderItem = require("./orderItem");
 
 require("dotenv").config({ path: "variables.env" });
 const sequelize = new Sequelize(
@@ -26,5 +28,13 @@ const deliveries = sequelize.define(
   },
   { freezeTableName: true, timestamps: false }
 );
+
+deliveries.associate = (model) => {
+  deliveries.belongsTo(model.OrderItem, {
+    foreignKey: {
+      allowNull: false,
+    },
+  });
+};
 
 module.exports = deliveries;

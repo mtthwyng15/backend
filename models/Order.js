@@ -1,4 +1,5 @@
 const { Sequelize, DataTypes } = require("sequelize");
+const OrderItem = require("./orderItem");
 
 require("dotenv").config({ path: "variables.env" });
 const sequelize = new Sequelize(
@@ -31,5 +32,9 @@ const Order = sequelize.define(
   },
   { freezeTableName: true, timestamps: false }
 );
+
+Order.associate = (model) => {
+  Order.hasMany(model.orderItem);
+};
 
 module.exports = Order;

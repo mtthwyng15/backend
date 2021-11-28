@@ -18,7 +18,6 @@ async function connectDB() {
 async function getOrder(Order) {
   const queryInterface = connectDB();
   //   queryInterface.get(select * order where id = orderId)
-  // queryInterface.findAll
   //   const order = await getOrders.findAll();
   //   console.log(order);
 }

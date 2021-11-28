@@ -1,52 +1,42 @@
 const mongoose = require("mongoose");
+const CustomerCompany = require("./CustomerCompany");
 mongoose.Promise = global.Promise;
 
-const customerSchema = new mongoose.Schema({
-  user_id: {
-    type: Number,
-    required: true,
-  },
-  login: {
-    type: String,
-    required: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  name: {
-    type: String,
-    required: true,
-  },
-  company_id: {
-    type: Number,
-    required: true,
-  },
-  credit_cards: {
-    type: Number,
-    required: true,
-  },
-});
+const connection = mongoose.createConnection(
+  "mongodb://localhost:27017/sample0001"
+);
 
-function load_customers(table) {
-  fs.createReadStream(`./csv/customers.csv`)
-    .pipe(csv())
-    .on("data", (row) => {
-      let a = 0;
-      console.log(a);
+const customerSchema = new mongoose.Schema(
+  {
+    user_id: {
+      type: Number,
+      required: true,
+    },
+    login: {
+      type: String,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    company_id: {
+      type: Number,
+      // ref: CustomerCompany,
+      required: true,
+    },
+    credit_cards: {
+      type: Number,
+      required: true,
+    },
+  },
+  { Collection: "Customer" }
+);
 
-      table.insertOne({
-        user_id: row.user_id,
-        login: row.login,
-        password: row.password,
-        name: row.name,
-        company_id: row.company_id,
-        credit_cards: row.credit_cards,
-      });
-    })
-    .on("end", () => {
-      console.log("CSV file successfully processed");
-    });
-}
-
+console.log("-------------");
+console.log(customerSchema);
 module.exports = mongoose.model("Customer", customerSchema);
