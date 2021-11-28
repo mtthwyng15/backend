@@ -4,7 +4,7 @@ mongoose.Promise = global.Promise;
 const customerCompanySchema = new mongoose.Schema(
   {
     company_id: {
-      type: Number,
+      type: String,
       required: true,
     },
     company_name: {
@@ -12,7 +12,7 @@ const customerCompanySchema = new mongoose.Schema(
       required: true,
     },
   },
-  { Collection: "CustomerCompany" }
+  { Collection: "CustomerCompanies" }
 );
 
-module.exports = mongoose.model("CustomerCompany", customerCompanySchema);
+module.exports = mongoose.model("customercompanies", customerCompanySchema);
