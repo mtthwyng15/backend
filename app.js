@@ -26,11 +26,20 @@ app.get("/Order", function (req, res) {
   //  res.send("Hello World!");
 
   Order.findAll({
-    // include: orderItem,
+    attributes: ["created_at", "order_name", "customer_id"],
     include: [
       {
         model: orderItem,
-        include: [deliveries],
+        attributes: ["price_per_unit", "quantity", "product"],
+        include: [
+          {
+            model: deliveries,
+            attributes: ["delivered_quantity"],
+          },
+        ],
+        // model: Customer,
+        // attributes: ['customer_name'],
+        // where{company}
       },
     ],
   })
@@ -60,11 +69,10 @@ app.get("/deliveries", (req, res) => {
 });
 
 app.get("/Customer", async (req, res) => {
-  const customer = await Customer.find();
-  console.log(customer);
-  res.send(customer);
+  // const customer = await Customer.find();
+  const customer = await Customer.getCompany();
+  res.json(customer);
 });
-// });
 
 app.get("/CustomerCompany", (req, res) => {
   CustomerCompany.find().then((company) => {

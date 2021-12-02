@@ -22,7 +22,7 @@ const customerSchema = new mongoose.Schema(
     },
     company_id: {
       type: String,
-      // ref: CustomerCompany,
+      // ref: "customercompanies",
       required: true,
     },
     credit_cards: {
@@ -32,4 +32,17 @@ const customerSchema = new mongoose.Schema(
   },
   { Collection: "Customers" }
 );
+
+customerSchema.statics.getCompany = function () {
+  return this.aggregate([
+    {
+      $lookup: {
+        from: "customercompanies",
+        localField: "company_id",
+        foreignField: "company_id",
+        as: "gatherCompany",
+      },
+    },
+  ]);
+};
 module.exports = mongoose.model("customers", customerSchema);
