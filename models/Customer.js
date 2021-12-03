@@ -45,4 +45,5 @@ customerSchema.statics.getCompany = function () {
     },
   ]);
 };
+
 module.exports = mongoose.model("customers", customerSchema);
