@@ -38,8 +38,8 @@ function load_order_items(queryInterface, table) {
     });
 }
 
-function createDb() {
-  console.log(databaseName);
+function createDb(databaseName) {
+  // console.log(databaseName);
   var pgtools = require("pgtools");
   pgtools.createdb(
     {
@@ -196,6 +196,6 @@ function insertdeliveries(queryInterface, row) {
     {}
   );
 }
-
-createDb();
+createDb(`${process.env.POSTGRES_DB_NAME}`);
+// createDb();
 initialiseDatabase();

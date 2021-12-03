@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "start": "node ./start.js",
+    "seed_postgres": "node migrations/seed_postgres.js",
+    "start": "node app.js",
     "watch": "nodemon ./start.js --ignore public/",
     "build": "cd client && npm install && npm run build"
   },

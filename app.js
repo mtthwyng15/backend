@@ -37,15 +37,46 @@ app.get("/Order", function (req, res) {
             attributes: ["delivered_quantity"],
           },
         ],
-        // model: Customer,
-        // attributes: ['customer_name'],
-        // where{company}
       },
     ],
   })
-    .then((Order) => {
-      res.send(Order);
+    .then((orders) => {
+      //const customer = Customer.getCompany(i);
+
+      const payload = orders.map(function (order) {
+        const customer = Customer.find({ user_id: order.customer_id });
+        const val = customer.getFilter();
+
+        console.log(val);
+
+        // const company = CustomerCompany.find({
+        //   company_id: customer.company_id,
+        // });
+        // company.getFilter();
+
+        // customer.find({ company_id: customercompanies.company_id });
+        // customer.getFilter();
+        // console.log(customer);
+        // console.log("---------------");
+        // console.log(company);
+
+        return {
+          order_name: order.order_name,
+          id: order.customer_id,
+          // hello: "world",
+          name: val.user_id,
+          // company_name: customer.company_name,
+        };
+      });
+
+      // const payload = {
+      //   orders,
+      //   hello: "world",
+      // };
+
+      res.send(payload);
     })
+
     .catch((err) => {
       console.log(err);
     });
@@ -71,8 +102,27 @@ app.get("/deliveries", (req, res) => {
 app.get("/Customer", async (req, res) => {
   // const customer = await Customer.find();
   const customer = await Customer.getCompany();
-  res.json(customer);
+
+  // const query = Customer.find({
+  //   company_id: 1,
+  // });
+  // query.getFilter();
+
+  // const err = await query.exec().then(
+  //   () => null,
+  //   (err) => err
+  // );
+  // console.log("------");
+  // console.log(query);
+  // console.log("------");
+  // res.json(query);
 });
+
+// app.get("/Customer", async (req, res) => {
+//   // const customer = await Customer.find();
+//   const customer = await Customer.getCompany();
+//   res.json(customer);
+// });
 
 app.get("/CustomerCompany", (req, res) => {
   CustomerCompany.find().then((company) => {
@@ -83,7 +133,7 @@ app.get("/CustomerCompany", (req, res) => {
 
 db.sequelize.sync().then((req) => {
   app.listen(port, function () {
-    console.log(`Example app listening on port ${port}!`);
+    console.log(`App listening on port ${port}!`);
   });
 });
 
