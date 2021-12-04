@@ -41,32 +41,40 @@ As a User
 - Assumptions
 
   - Postgresql has already been installed
-  - Postgresql service has already started with default port
-  - Database name `test0009` has not been created or does not exist
+  - Postgresql service has already started with default port 5432
+  - Default database name for Postgres `packform`
+  - Database name `packform` has not been created or does not exist
   - Username `postgres` and password `postgres` and grant necessary privileges
   - NodeJS has been installed
   - Mongodb has been installed
-  - Mongodb service has already been started with default port
-  - Username `myUserAdmin` and password `abc123`
-  - Database name `sample10`
+  - Mongodb service has already been started with default port 27017
+  - Default database name for MongoDB `packform`
 
 - How to run the script and populate data into Postgres database
 
 ```bash
 npm install
-node run seed_postgres
+npm run create_db
+npm run seed_postgres
 ```
 
 - How to run the script and population data into MongoDB
 
 ```
-node migrations/seed_mongo.js
+npm run seed_mongo
 ```
 
 - How to start the backend server
 
 ```bash
-node app.js
-localhost:4000/Order
-localhost:4000/Customer
+npm run start
 ```
+
+- How to verify
+
+```bash
+curl localhost:4000/order
+```
+
+- How to change database details
+- go to `variables.env` to modify any database details.

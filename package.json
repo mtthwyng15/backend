@@ -1,6 +1,8 @@
 {
   "scripts": {
     "seed_postgres": "node migrations/seed_postgres.js",
+    "seed_mongo": "node migrations/seed_mongo.js",
+    "create_db": "node migrations/create_database.js",
     "start": "node app.js",
     "watch": "nodemon ./start.js --ignore public/",
     "build": "cd client && npm install && npm run build"
