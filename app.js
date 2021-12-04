@@ -46,13 +46,12 @@ app.get("/Order", async function (req, res) {
 
       return {
         customer_name: customer.name,
+        company_name: customer.gatherCompany[0].company_name,
         orders: userOrders,
       };
     })
   );
-  console.log("_________");
-  console.log(items);
-  console.log("---------");
+
   res.send(items);
 });
 
