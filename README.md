@@ -36,7 +36,7 @@ As a User
 
 ## Usage
 
-### Postgres
+### Postgres and MongoDB
 
 - Assumptions
 
@@ -58,7 +58,7 @@ npm run create_db
 npm run seed_postgres
 ```
 
-- How to run the script and population data into MongoDB
+- How to run the script and populate data into MongoDB
 
 ```
 npm run seed_mongo
@@ -78,3 +78,5 @@ curl localhost:4000/order
 
 - How to change database details
 - go to `variables.env` to modify any database details.
+
+- By default port the backend server listens on port `4000` and it is defined in the `app.js` file
