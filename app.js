@@ -44,15 +44,20 @@ app.get("/Order", async function (req, res) {
         where: { customer_id: customer.user_id },
       });
 
-      return {
-        customer_name: customer.name,
-        company_name: customer.gatherCompany[0].company_name,
-        orders: userOrders,
-      };
+      const customerOrder = userOrders.map(function (order) {
+        return {
+          order_name: order.order_name,
+          order_date: order.created_at.toDateString(),
+          order_items: order.OrderItems,
+          customer_name: customer.name,
+          company_name: customer.gatherCompany[0].company_name,
+        };
+      });
+
+      return customerOrder;
     })
   );
-
-  res.send(items);
+  res.send(items.flat());
 });
 
 app.get("/orderItem", (req, res) => {
