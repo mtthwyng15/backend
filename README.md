@@ -1,5 +1,7 @@
 # Full-stack Software Engineer test
 
+This is a backend application written in NodeJS and this is the link (https://github.com/mtthwyng15/frontend) to the front end application. The reason for splitting this and the front end application is because of best practises and for scalability and maintainability.
+
 ## Having the following:
 
 - 2 databases - MongoDB and PostgreSQL
@@ -33,8 +35,6 @@ As a User
 - There should be a Readme file with clear setup instructions
 - (Bonus) Unit / functional / integration tests
 - Please upload the completed solution to a hosted source repository (on GitHub, GitLab or similar).
-
-This is a backend application written in NodeJS and this is the link (https://github.com/mtthwyng15/frontend) to the front end application. The reason for splitting this and the front end application is because of best practises and for scalability and maintainability.
 
 ## Usage
 
