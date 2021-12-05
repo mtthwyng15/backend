@@ -34,7 +34,15 @@ As a User
 - (Bonus) Unit / functional / integration tests
 - Please upload the completed solution to a hosted source repository (on GitHub, GitLab or similar).
 
+This is a backend application written in NodeJS and this is the link (https://github.com/mtthwyng15/frontend) to the front end application. The reason for splitting this and the front end application is because of best practises and for scalability and maintainability.
+
 ## Usage
+
+### Pre-requisites
+
+- [NodeJS](https://nodejs.org/en/)
+- [PostgreSQL](https://www.postgresql.org/download/)
+- [MongoDB](https://www.mongodb.com/try/download/community)
 
 ### Postgres and MongoDB
 
@@ -76,7 +84,7 @@ npm run start
 curl localhost:4000/order
 ```
 
-- How to change database details
+- How to modify database details
 - go to `variables.env` to modify any database details.
 
 - By default port the backend server listens on port `4000` and it is defined in the `app.js` file

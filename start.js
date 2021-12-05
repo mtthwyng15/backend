@@ -14,8 +14,6 @@ mongoose.connection.on("error", (err) => {
 });
 
 require("./models/Customer");
-// require("./models/CustomerCompany");
-// require("./models/mongo");
 
 const app = require("./app");
 const server = app.listen(app.get("port"), () => {

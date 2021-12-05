@@ -4,8 +4,6 @@ const db = require("././models");
 const mongoose = require("mongoose");
 require("dotenv").config({ path: "variables.env" });
 const url = process.env.MONGODB;
-// const connection = mongoose.createConnection(url);
-// const client = new MongoClient(url);
 mongoose.connect(url);
 mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
 mongoose.connection.on("error", (err) => {
@@ -22,7 +20,7 @@ const deliveries = require("././models/deliveries");
 const app = express();
 const port = 4000;
 
-app.get("/Order", async function (req, res) {
+app.get("/order", async function (req, res) {
   const customers = await Customer.getCompany();
 
   const items = await Promise.all(
@@ -60,7 +58,7 @@ app.get("/Order", async function (req, res) {
   res.send(items.flat());
 });
 
-app.get("/orderItem", (req, res) => {
+app.get("/orderitem", (req, res) => {
   OrderItem.findAll({
     include: deliveries,
   }).then((order) => {
@@ -76,13 +74,12 @@ app.get("/deliveries", (req, res) => {
   });
 });
 
-app.get("/Customer", async (req, res) => {
-  // const customer = await Customer.find();
+app.get("/customer", async (req, res) => {
   const customer = await Customer.getCompany();
   res.json(customer);
 });
 
-app.get("/CustomerCompany", (req, res) => {
+app.get("/customerCompany", (req, res) => {
   CustomerCompany.find().then((company) => {
     console.log(company);
     res.send(company);
@@ -94,7 +91,5 @@ db.sequelize.sync().then((req) => {
     console.log(`App listening on port ${port}!`);
   });
 });
-
-// app.use("/", routes);
 
 module.exports = app;
